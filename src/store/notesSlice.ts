@@ -1,10 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface Note {
-  id: number;
+  id: string;
   title: string;
   content: string;
+  createdAt: string;
+  updatedAt: string;
 }
+
 
 interface NotesState {
   notes: Note[];

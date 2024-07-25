@@ -1,3 +1,4 @@
+// src/app/edit/[id]/page.tsx
 "use client";
 
 import { useEffect, useState } from 'react';
@@ -31,13 +32,18 @@ export default function EditNote() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const port = process.env.NEXT_PUBLIC_JSON_SERVER_PORT;
-    try {
-      await axios.put(`http://localhost:${port}/notes/${id}`, { title, content });
-      router.push('/');
-    } catch (error) {
-      console.error("Error updating note:", error);
+    if (!title || !content) {
+      alert("Title and content are required");
+      return;
     }
+
+    const port = process.env.NEXT_PUBLIC_JSON_SERVER_PORT;
+    await axios.put(`http://localhost:${port}/notes/${id}`, {
+      title,
+      content,
+      updatedAt: new Date().toISOString()
+    });
+    router.push('/');
   };
 
   return (

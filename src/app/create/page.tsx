@@ -1,3 +1,4 @@
+// src/app/create/page.tsx
 "use client";
 
 import { useState } from 'react';
@@ -13,8 +14,18 @@ export default function CreateNote() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!title || !content) {
+      alert("Title and content are required");
+      return;
+    }
+
     const port = process.env.NEXT_PUBLIC_JSON_SERVER_PORT;
-    await axios.post(`http://localhost:${port}/notes`, { title, content });
+    await axios.post(`http://localhost:${port}/notes`, {
+      title,
+      content,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    });
     router.push('/');
   };
 

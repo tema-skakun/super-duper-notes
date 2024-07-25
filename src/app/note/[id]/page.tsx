@@ -7,9 +7,11 @@ import { Button } from 'react-bootstrap';
 import Link from 'next/link';
 
 interface Note {
-  id: number;
+  id: string;
   title: string;
   content: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export default function NoteDetail() {
@@ -30,10 +32,18 @@ export default function NoteDetail() {
 
   if (!note) return <p>Loading...</p>;
 
+  const isUpdated = new Date(note.updatedAt).getTime() !== new Date(note.createdAt).getTime();
+
   return (
     <div>
       <h1>{note.title}</h1>
       <p>{note.content}</p>
+      <p>
+        Created on: {new Date(note.createdAt).toLocaleDateString()}
+        {isUpdated && (
+          <span> (Updated on: {new Date(note.updatedAt).toLocaleDateString()})</span>
+        )}
+      </p>
       <Link href={`/edit/${note.id}`}>
         <Button variant="secondary">Edit Note</Button>
       </Link>
