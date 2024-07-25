@@ -6,19 +6,28 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "server": "json-server --watch db.json --port 5001"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.2.6",
+    "@types/react-redux": "^7.1.33",
+    "axios": "^1.7.2",
+    "bootstrap": "^5.3.3",
+    "json-server": "^1.0.0-beta.1",
+    "next": "14.2.5",
     "react": "^18",
+    "react-bootstrap": "^2.10.4",
     "react-dom": "^18",
-    "next": "14.2.5"
+    "react-redux": "^9.1.2"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "dotenv-cli": "^7.4.2",
     "eslint": "^8",
-    "eslint-config-next": "14.2.5"
+    "eslint-config-next": "14.2.5",
+    "typescript": "^5"
   }
 }
