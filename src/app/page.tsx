@@ -6,7 +6,7 @@ import { RootState, AppDispatch } from '@/store';
 import { setNotes } from '@/store/notesSlice';
 import axios from 'axios';
 import Link from 'next/link';
-import { Button, InputGroup, FormControl, Dropdown } from 'react-bootstrap';
+import { Button, InputGroup, FormControl, Dropdown, Container, Row, Col } from 'react-bootstrap';
 import NoteListItem from "@/components/NoteListItem";
 import './globals.css';
 
@@ -48,40 +48,50 @@ export default function Home() {
   }, [dispatch]);
 
   return (
-    <main className="p-4">
+    <Container>
       <h1>Notes</h1>
-      <InputGroup className="mb-3">
-        <FormControl
-          placeholder="Filter notes"
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-        />
-        <Dropdown>
-          <Dropdown.Toggle variant="outline-secondary" id="dropdown-basic">
-            Sort by {sort.charAt(0).toUpperCase() + sort.slice(1)}
-          </Dropdown.Toggle>
+      <Row className="mb-3">
+        <Col>
+          <InputGroup>
+            <FormControl
+              placeholder="Filter notes"
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+            />
+            <Dropdown>
+              <Dropdown.Toggle variant="outline-secondary" id="dropdown-basic">
+                Sort by {sort.charAt(0).toUpperCase() + sort.slice(1)}
+              </Dropdown.Toggle>
 
-          <Dropdown.Menu>
-            {SORT_OPTIONS.map(option => (
-              <Dropdown.Item
-                key={option}
-                onClick={() => setSort(option)}
-                active={sort === option}
-              >
-                {option.charAt(0).toUpperCase() + option.slice(1).replace(/([A-Z])/g, ' $1').trim()}
-              </Dropdown.Item>
-            ))}
-          </Dropdown.Menu>
-        </Dropdown>
-      </InputGroup>
-      <Link href="/create" passHref>
-        <Button variant="primary" className="mb-3">Create Note</Button>
-      </Link>
-      <ul>
+              <Dropdown.Menu>
+                {SORT_OPTIONS.map(option => (
+                  <Dropdown.Item
+                    key={option}
+                    onClick={() => setSort(option)}
+                    active={sort === option}
+                  >
+                    {option.charAt(0).toUpperCase() + option.slice(1).replace(/([A-Z])/g, ' $1').trim()}
+                  </Dropdown.Item>
+                ))}
+              </Dropdown.Menu>
+            </Dropdown>
+          </InputGroup>
+        </Col>
+      </Row>
+      <Row className="mb-3">
+        <Col>
+          <Link href="/create" passHref>
+            <Button variant="primary">Create Note</Button>
+          </Link>
+        </Col>
+      </Row>
+      <Row>
         {filteredNotes.map(note => (
-          <NoteListItem key={note.id} note={note} />
+          <Col key={note.id} xs={12} sm={6} md={4} lg={3}>
+            <NoteListItem note={note} />
+          </Col>
         ))}
-      </ul>
-    </main>
+      </Row>
+    </Container>
   );
 }
