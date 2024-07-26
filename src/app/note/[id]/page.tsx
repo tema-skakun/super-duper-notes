@@ -1,3 +1,4 @@
+// src/app/note/[id]/page.tsx
 "use client";
 
 import { useParams } from 'next/navigation';
@@ -5,6 +6,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface Note {
   id: string;
@@ -17,6 +19,7 @@ interface Note {
 export default function NoteDetail() {
   const { id } = useParams();
   const [note, setNote] = useState<Note | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     if (id) {
@@ -29,6 +32,12 @@ export default function NoteDetail() {
       fetchNote();
     }
   }, [id]);
+
+  const handleDelete = async () => {
+    const port = process.env.NEXT_PUBLIC_JSON_SERVER_PORT;
+    await axios.delete(`http://localhost:${port}/notes/${id}`);
+    router.push('/');
+  };
 
   if (!note) return <p>Loading...</p>;
 
@@ -47,6 +56,7 @@ export default function NoteDetail() {
       <Link href={`/edit/${note.id}`}>
         <Button variant="secondary">Edit Note</Button>
       </Link>
+      <Button variant="danger" onClick={handleDelete}>Delete Note</Button>
     </div>
   );
 }
