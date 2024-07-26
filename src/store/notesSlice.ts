@@ -8,7 +8,6 @@ interface Note {
   updatedAt: string;
 }
 
-
 interface NotesState {
   notes: Note[];
 }
@@ -33,7 +32,7 @@ const notesSlice = createSlice({
         state.notes[index] = action.payload;
       }
     },
-    deleteNote: (state, action: PayloadAction<number>) => {
+    deleteNote: (state, action: PayloadAction<string>) => {
       state.notes = state.notes.filter(note => note.id !== action.payload);
     },
   },
