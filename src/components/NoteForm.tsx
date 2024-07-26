@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { Button, Form } from 'react-bootstrap';
 import styles from './NoteForm.module.css';
+import { fetchNoteById } from '@/api/notes';
 
 interface NoteFormProps {
   noteId?: string;
@@ -21,9 +21,8 @@ export default function NoteForm({ noteId, initialTitle = '', initialContent = '
   useEffect(() => {
     if (noteId) {
       const fetchNote = async () => {
-        const port = process.env.NEXT_PUBLIC_JSON_SERVER_PORT;
         try {
-          const response = await axios.get(`http://localhost:${port}/notes/${noteId}`);
+          const response = await fetchNoteById(noteId);
           setTitle(response.data.title);
           setContent(response.data.content);
         } catch (error) {

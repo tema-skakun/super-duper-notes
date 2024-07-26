@@ -2,10 +2,10 @@
 
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Button } from 'react-bootstrap';
+import { Button, Alert } from 'react-bootstrap';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { fetchNoteById, deleteNote } from '@/api/notes';
 
 interface Note {
   id: string;
@@ -18,14 +18,18 @@ interface Note {
 export default function NoteDetail() {
   const { id } = useParams();
   const [note, setNote] = useState<Note | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
     if (id) {
       const fetchNote = async () => {
-        const port = process.env.NEXT_PUBLIC_JSON_SERVER_PORT;
-        const response = await axios.get(`http://localhost:${port}/notes/${id}`);
-        setNote(response.data);
+        try {
+          const response = await fetchNoteById(id);
+          setNote(response.data);
+        } catch (err) {
+          setError('Failed to fetch note');
+        }
       };
 
       fetchNote();
@@ -33,11 +37,15 @@ export default function NoteDetail() {
   }, [id]);
 
   const handleDelete = async () => {
-    const port = process.env.NEXT_PUBLIC_JSON_SERVER_PORT;
-    await axios.delete(`http://localhost:${port}/notes/${id}`);
-    router.push('/');
+    try {
+      await deleteNote(id);
+      router.push('/');
+    } catch (err) {
+      setError('Failed to delete note');
+    }
   };
 
+  if (error) return <Alert variant="danger">{error}</Alert>;
   if (!note) return <p>Loading...</p>;
 
   const isUpdated = new Date(note.updatedAt).getTime() !== new Date(note.createdAt).getTime();
