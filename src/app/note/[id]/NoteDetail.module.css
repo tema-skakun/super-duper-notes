@@ -23,3 +23,19 @@
 .noteDetail .buttons button {
   margin-right: 10px;
 }
+
+.noteDetail h1 {
+  margin-bottom: 15px;
+  color: #333;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.noteDetail p {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}

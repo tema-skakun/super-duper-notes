@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
@@ -34,12 +32,23 @@ export default function NoteListItem({ note }: NoteListItemProps) {
     setShowModal(false);
   };
 
+  const isUpdated = new Date(note.updatedAt).getTime() !== new Date(note.createdAt).getTime();
+
   return (
     <div className={styles.note}>
       <Link href={`/note/${note.id}`} passHref>
-        <h2>{note.title}</h2>
+        <h2 title={note.title}>{note.title}</h2>
       </Link>
-      <Button variant="danger" onClick={() => setShowModal(true)}>Delete</Button>
+      <p className={styles.content}>{note.content}</p>
+      <div className={styles.footer}>
+        <div className={styles.dates}>
+          <span>Created on: {new Date(note.createdAt).toLocaleString()}</span>
+          {isUpdated && (
+            <span> (Updated on: {new Date(note.updatedAt).toLocaleString()})</span>
+            )}
+        </div>
+        <Button variant="danger" onClick={() => setShowModal(true)}>Delete</Button>
+      </div>
 
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>

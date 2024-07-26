@@ -14,8 +14,27 @@
 .note h2 {
   margin-bottom: 10px;
   color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
 }
 
-.note button {
-  margin-top: 10px;
+.note .content {
+  margin-bottom: 20px;
+  color: #555;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.note .footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.note .dates {
+  color: #777;
+  font-size: 0.9em;
 }

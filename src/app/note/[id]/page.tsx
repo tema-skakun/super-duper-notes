@@ -54,7 +54,7 @@ export default function NoteDetail() {
 
   return (
     <div className={styles.noteDetail}>
-      <h1>{note.title}</h1>
+      <h1 title={note.title}>{note.title}</h1>
       <p>{note.content}</p>
       <p>
         Created on: {new Date(note.createdAt).toLocaleString()}
