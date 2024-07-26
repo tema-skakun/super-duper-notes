@@ -32,11 +32,11 @@ export default function NoteListItem({ note }: NoteListItemProps) {
   };
 
   return (
-    <li className={styles.note}>
+    <div className={styles.note}>
       <Link href={`/note/${note.id}`} passHref>
         <h2>{note.title}</h2>
       </Link>
       <Button variant="danger" onClick={() => handleDelete(note.id)}>Delete</Button>
-    </li>
+    </div>
   );
 }

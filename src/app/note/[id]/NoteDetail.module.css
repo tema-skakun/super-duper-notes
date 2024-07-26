@@ -1,0 +1,25 @@
+.noteDetail {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  margin-bottom: 20px;
+}
+
+.noteDetail h1 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.noteDetail p {
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.noteDetail .buttons {
+  margin-top: 20px;
+}
+
+.noteDetail .buttons button {
+  margin-right: 10px;
+}

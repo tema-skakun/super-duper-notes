@@ -6,6 +6,7 @@ import { Button, Alert } from 'react-bootstrap';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { fetchNoteById, deleteNote } from '@/api/notes';
+import styles from './NoteDetail.module.css';
 
 interface Note {
   id: string;
@@ -51,7 +52,7 @@ export default function NoteDetail() {
   const isUpdated = new Date(note.updatedAt).getTime() !== new Date(note.createdAt).getTime();
 
   return (
-    <div>
+    <div className={styles.noteDetail}>
       <h1>{note.title}</h1>
       <p>{note.content}</p>
       <p>
@@ -60,10 +61,12 @@ export default function NoteDetail() {
           <span> (Updated on: {new Date(note.updatedAt).toLocaleString()})</span>
         )}
       </p>
-      <Link href={`/edit/${note.id}`}>
-        <Button variant="secondary">Edit Note</Button>
-      </Link>
-      <Button variant="danger" onClick={handleDelete}>Delete Note</Button>
+      <div className={styles.buttons}>
+        <Link href={`/edit/${note.id}`}>
+          <Button variant="secondary">Edit Note</Button>
+        </Link>
+        <Button variant="danger" onClick={handleDelete}>Delete Note</Button>
+      </div>
     </div>
   );
 }

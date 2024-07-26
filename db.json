@@ -1,25 +1,3 @@
 {
-  "notes": [
-    {
-      "id": "28f5",
-      "title": "sample note",
-      "content": "sample text",
-      "createdAt": "2024-07-26T14:47:34.593Z",
-      "updatedAt": "2024-07-26T14:47:34.593Z"
-    },
-    {
-      "title": "second note",
-      "content": "text qqq",
-      "createdAt": "2024-07-26T14:47:52.222Z",
-      "updatedAt": "2024-07-26T14:48:06.609Z",
-      "id": "a316"
-    },
-    {
-      "title": "3-dr note",
-      "content": "kjhgfd",
-      "createdAt": "2024-07-26T14:54:01.634Z",
-      "updatedAt": "2024-07-26T15:12:02.602Z",
-      "id": "e6f2"
-    }
-  ]
+  "notes": []
 }
