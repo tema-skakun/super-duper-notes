@@ -1,23 +1,18 @@
 {
   "notes": [
     {
-      "title": "qwerty",
-      "content": "asdfgh",
-      "updatedAt": "2024-07-26T14:10:44.469Z",
-      "id": "8a32"
-    },
-    {
-      "id": "0a9f",
+      "id": "28f5",
       "title": "sample note",
-      "content": "hello world",
-      "createdAt": "2024-07-26T14:28:37.008Z",
-      "updatedAt": "2024-07-26T14:28:37.008Z"
+      "content": "sample text",
+      "createdAt": "2024-07-26T14:47:34.593Z",
+      "updatedAt": "2024-07-26T14:47:34.593Z"
     },
     {
-      "title": "asdfvb 12345",
-      "content": "sdfvb dfghgfd",
-      "updatedAt": "2024-07-26T14:32:26.388Z",
-      "id": "12ba"
+      "title": "second note",
+      "content": "text qqq",
+      "createdAt": "2024-07-26T14:47:52.222Z",
+      "updatedAt": "2024-07-26T14:48:06.609Z",
+      "id": "a316"
     }
   ]
 }

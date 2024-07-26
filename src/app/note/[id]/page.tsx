@@ -55,9 +55,9 @@ export default function NoteDetail() {
       <h1>{note.title}</h1>
       <p>{note.content}</p>
       <p>
-        Created on: {new Date(note.createdAt).toLocaleDateString()}
+        Created on: {new Date(note.createdAt).toLocaleString()}
         {isUpdated && (
-          <span> (Updated on: {new Date(note.updatedAt).toLocaleDateString()})</span>
+          <span> (Updated on: {new Date(note.updatedAt).toLocaleString()})</span>
         )}
       </p>
       <Link href={`/edit/${note.id}`}>

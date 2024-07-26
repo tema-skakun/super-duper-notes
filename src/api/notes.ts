@@ -15,7 +15,7 @@ export const createNote = async (note: { title: string; content: string }) => {
   return axios.post(baseURL, note);
 };
 
-export const updateNote = async (id: string, note: { title: string; content: string; updatedAt: string }) => {
+export const updateNote = async (id: string, note: { title: string; content: string; createdAt: string; updatedAt: string }) => {
   return axios.put(`${baseURL}/${id}`, note);
 };
 
