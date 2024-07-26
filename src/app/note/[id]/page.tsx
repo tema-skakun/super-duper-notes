@@ -1,4 +1,3 @@
-// src/app/note/[id]/page.tsx
 "use client";
 
 import { useParams } from 'next/navigation';

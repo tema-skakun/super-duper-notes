@@ -1,4 +1,3 @@
-// src/components/NoteListItem.tsx
 "use client";
 
 import Link from "next/link";
@@ -8,6 +7,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/store';
 import { deleteNote } from '@/store/notesSlice';
+import styles from './NoteListItem.module.css';
 
 interface Note {
   id: string;
@@ -32,7 +32,7 @@ export default function NoteListItem({ note }: NoteListItemProps) {
   };
 
   return (
-    <li>
+    <li className={styles.note}>
       <Link href={`/note/${note.id}`} passHref>
         <h2>{note.title}</h2>
       </Link>

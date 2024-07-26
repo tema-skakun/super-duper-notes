@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { Button, Form } from 'react-bootstrap';
+import styles from './NoteForm.module.css';
 
 interface NoteFormProps {
   noteId?: string;
@@ -44,8 +45,8 @@ export default function NoteForm({ noteId, initialTitle = '', initialContent = '
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="formTitle">
+    <Form onSubmit={handleSubmit} className={styles.form}>
+      <Form.Group controlId="formTitle" className={styles.input}>
         <Form.Label>Title</Form.Label>
         <Form.Control
           type="text"
@@ -54,7 +55,7 @@ export default function NoteForm({ noteId, initialTitle = '', initialContent = '
           onChange={(e) => setTitle(e.target.value)}
         />
       </Form.Group>
-      <Form.Group controlId="formContent">
+      <Form.Group controlId="formContent" className={styles.input}>
         <Form.Label>Content</Form.Label>
         <Form.Control
           as="textarea"
