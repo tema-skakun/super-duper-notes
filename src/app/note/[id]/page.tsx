@@ -2,7 +2,7 @@
 
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { Button, Alert } from 'react-bootstrap';
+import { Button, Alert, Modal } from 'react-bootstrap';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { fetchNoteById, deleteNote } from '@/api/notes';
@@ -20,6 +20,7 @@ export default function NoteDetail() {
   const { id } = useParams();
   const [note, setNote] = useState<Note | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [showModal, setShowModal] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -65,8 +66,23 @@ export default function NoteDetail() {
         <Link href={`/edit/${note.id}`}>
           <Button variant="secondary">Edit Note</Button>
         </Link>
-        <Button variant="danger" onClick={handleDelete}>Delete Note</Button>
+        <Button variant="danger" onClick={() => setShowModal(true)}>Delete Note</Button>
       </div>
+
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Deletion</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to delete this note?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)} autoFocus>
+            No
+          </Button>
+          <Button variant="danger" onClick={handleDelete}>
+            Yes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
