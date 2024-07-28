@@ -41,27 +41,6 @@
       "createdAt": "2024-07-28T00:41:46.496Z",
       "updatedAt": "2024-07-28T15:07:46.367Z",
       "id": "43fe"
-    },
-    {
-      "title": "заметка note",
-      "content": "текст text",
-      "createdAt": "2024-07-28T15:51:15.738Z",
-      "updatedAt": "2024-07-28T16:52:40.935Z",
-      "id": "1770"
-    },
-    {
-      "id": "5662",
-      "title": "text",
-      "content": "text",
-      "createdAt": "2024-07-28T16:52:53.780Z",
-      "updatedAt": "2024-07-28T16:52:53.780Z"
-    },
-    {
-      "id": "5b6e",
-      "title": "test note",
-      "content": "test text",
-      "createdAt": "2024-07-28T17:10:25.735Z",
-      "updatedAt": "2024-07-28T17:10:25.735Z"
     }
   ]
 }
