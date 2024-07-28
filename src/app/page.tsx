@@ -10,7 +10,7 @@ import { Button, InputGroup, FormControl, Dropdown, Container, Row, Col } from '
 import NoteListItem from "@/components/NoteListItem";
 import './globals.css';
 
-const SORT_OPTIONS = ['title', 'createdAt', 'updatedAt'] as const;
+const SORT_OPTIONS = ['title', 'createdAt'] as const;
 type SortOption = typeof SORT_OPTIONS[number];
 
 export default function Home() {
@@ -26,7 +26,7 @@ export default function Home() {
       .sort((a, b) => {
         if (sort === 'title') {
           return a.title.localeCompare(b.title);
-        } else if (sort === 'createdAt' || sort === 'updatedAt') {
+        } else if (sort === 'createdAt') {
           return new Date(a[sort]).getTime() - new Date(b[sort]).getTime();
         }
         return 0;
@@ -49,7 +49,6 @@ export default function Home() {
 
   return (
     <Container>
-      <h1>Notes</h1>
       <Row className="mb-3">
         <Col>
           <InputGroup>

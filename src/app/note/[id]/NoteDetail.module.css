@@ -3,7 +3,9 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   background-color: #f9f9f9;
-  margin-bottom: 20px;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  margin-bottom: 2rem;
 }
 
 .noteDetail h1 {
@@ -17,11 +19,11 @@
 }
 
 .noteDetail .buttons {
-  margin-top: 20px;
+
 }
 
 .noteDetail .buttons button {
-  margin-right: 10px;
+  margin: 5px;
 }
 
 .noteDetail h1 {
