@@ -41,7 +41,7 @@ export default function Search() {
         <Col>
           <InputGroup>
             <FormControl
-              placeholder="Filter by title"
+              placeholder="Search by title"
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
             />

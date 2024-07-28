@@ -1,21 +1,19 @@
-"use client";
-
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '@/store';
-import { fetchNotesData } from '@/utils/fetchNotes';
+import { fetchNotes } from '@/api/notes';
 import Link from 'next/link';
-import { Button, Container, Row, Col } from 'react-bootstrap';
-import './globals.css';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import NoteListItem from "@/components/NoteListItem";
+import './globals.css';
 
-export default function Home() {
-  const dispatch = useDispatch<AppDispatch>();
-  const notes = useSelector((state: RootState) => state.notes.notes);
+export const dynamic = 'force-dynamic';
 
-  useEffect(() => {
-    fetchNotesData(dispatch);
-  }, [dispatch]);
+export default async function Home() {
+  let notes = [];
+  try {
+    const response = await fetchNotes();
+    notes = response.data;
+  } catch (error) {
+    console.error('Failed to fetch notes:', error);
+  }
 
   return (
     <Container>
@@ -27,7 +25,7 @@ export default function Home() {
         </Col>
       </Row>
       <Row>
-        {notes.map(note => (
+        {notes.map((note) => (
           <Col key={note.id} xs={12} sm={6} md={4} lg={3}>
             <NoteListItem note={note} />
           </Col>
