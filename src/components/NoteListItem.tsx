@@ -8,9 +8,9 @@ interface NoteListItemProps {
 
 export default function NoteListItem({note}: NoteListItemProps) {
   return (
-    <Link href={`/note/${note.id}`}>
+    <Link title={note.title} href={`/note/${note.id}`}>
       <div className={styles.note}>
-        <h3 title={note.title}>{note.title}</h3>
+        <h3>{note.title}</h3>
         <p className={styles.content}>{note.content}</p>
       </div>
     </Link>
