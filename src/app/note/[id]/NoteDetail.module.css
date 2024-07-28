@@ -39,3 +39,11 @@
 .noteDetail .buttons button {
   margin: 5px;
 }
+
+.date {
+  color: var(--primary-color); /* Здесь укажите желаемый цвет */
+}
+
+.updatedDate {
+  color: var(--danger-color); /* Укажите цвет для обновленной даты */
+}

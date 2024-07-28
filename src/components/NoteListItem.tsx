@@ -10,7 +10,7 @@ export default function NoteListItem({note}: NoteListItemProps) {
   return (
     <Link href={`/note/${note.id}`}>
       <div className={styles.note}>
-        <h2 title={note.title}>{note.title}</h2>
+        <h3 title={note.title}>{note.title}</h3>
         <p className={styles.content}>{note.content}</p>
       </div>
     </Link>
