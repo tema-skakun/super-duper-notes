@@ -7,14 +7,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { fetchNoteById, deleteNote } from '@/api/notes';
 import styles from './NoteDetail.module.css';
-
-interface Note {
-  id: string;
-  title: string;
-  content: string;
-  createdAt: string;
-  updatedAt: string;
-}
+import { Note } from '@/types/noteTypes';
 
 export default function NoteDetail() {
   const { id } = useParams();
