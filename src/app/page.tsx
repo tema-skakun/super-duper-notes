@@ -1,10 +1,9 @@
 "use client";
 
 import { useEffect } from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {AppDispatch, RootState} from '@/store';
-import { setNotes } from '@/store/notesSlice';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/store';
+import { fetchNotesData } from '@/utils/fetchNotes';
 import Link from 'next/link';
 import { Button, Container, Row, Col } from 'react-bootstrap';
 import './globals.css';
@@ -15,17 +14,7 @@ export default function Home() {
   const notes = useSelector((state: RootState) => state.notes.notes);
 
   useEffect(() => {
-    const fetchNotes = async () => {
-      try {
-        const port = process.env.NEXT_PUBLIC_JSON_SERVER_PORT;
-        const response = await axios.get(`http://localhost:${port}/notes`);
-        dispatch(setNotes(response.data));
-      } catch (error) {
-        console.error('Failed to fetch notes:', error);
-      }
-    };
-
-    fetchNotes();
+    fetchNotesData(dispatch);
   }, [dispatch]);
 
   return (

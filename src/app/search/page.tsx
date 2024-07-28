@@ -3,14 +3,12 @@
 import { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '@/store';
-import { setNotes } from '@/store/notesSlice';
-import axios from 'axios';
-import Link from 'next/link';
-import { Button, InputGroup, FormControl, Dropdown, Container, Row, Col } from 'react-bootstrap';
+import { fetchNotesData } from '@/utils/fetchNotes';
+import { InputGroup, FormControl, Dropdown, Container, Row, Col } from 'react-bootstrap';
 import NoteListItem from "@/components/NoteListItem";
 import '../globals.css';
 
-const SORT_OPTIONS = ['title', 'createdAt'] as const;
+const SORT_OPTIONS = ['Title', 'Created At'] as const;
 type SortOption = typeof SORT_OPTIONS[number];
 
 export default function Search() {
@@ -34,17 +32,7 @@ export default function Search() {
   }, [notes, filter, sort]);
 
   useEffect(() => {
-    const fetchNotes = async () => {
-      try {
-        const port = process.env.NEXT_PUBLIC_JSON_SERVER_PORT;
-        const response = await axios.get(`http://localhost:${port}/notes`);
-        dispatch(setNotes(response.data));
-      } catch (error) {
-        console.error('Failed to fetch notes:', error);
-      }
-    };
-
-    fetchNotes();
+    fetchNotesData(dispatch);
   }, [dispatch]);
 
   return (
@@ -53,23 +41,18 @@ export default function Search() {
         <Col>
           <InputGroup>
             <FormControl
-              placeholder="Filter notes"
+              placeholder="Filter by title"
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
             />
             <Dropdown>
-              <Dropdown.Toggle variant="outline-secondary" id="dropdown-basic">
-                Sort by {sort.charAt(0).toUpperCase() + sort.slice(1)}
+              <Dropdown.Toggle variant="outline-secondary">
+                Sort by: {sort}
               </Dropdown.Toggle>
-
               <Dropdown.Menu>
                 {SORT_OPTIONS.map(option => (
-                  <Dropdown.Item
-                    key={option}
-                    onClick={() => setSort(option)}
-                    active={sort === option}
-                  >
-                    {option.charAt(0).toUpperCase() + option.slice(1).replace(/([A-Z])/g, ' $1').trim()}
+                  <Dropdown.Item key={option} onClick={() => setSort(option)}>
+                    {option}
                   </Dropdown.Item>
                 ))}
               </Dropdown.Menu>
