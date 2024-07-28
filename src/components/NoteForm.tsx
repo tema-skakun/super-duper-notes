@@ -48,6 +48,7 @@ export default function NoteForm({ noteId, initialTitle = '', initialContent = '
       <Form.Group controlId="formTitle" className={styles.input}>
         <Form.Label>Title</Form.Label>
         <Form.Control
+          autoFocus
           type="text"
           placeholder="Enter note title"
           value={title}
