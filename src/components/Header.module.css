@@ -3,13 +3,20 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 4.5rem;
-  background-color: #f8f9fa;
-  border-bottom: 1px solid #ddd;
+  background-color: var(--primary-color);
+  color: var(--light-color);
+  border-bottom: 1px solid var(--dark-color);
   margin-bottom: 1rem;
+  transition: padding 0.3s ease;
+}
+
+@media (max-width: 576px) {
+  .header {
+    padding: 0.5rem 1.5rem;
+  }
 }
 
 .title {
   font-size: 2.5rem;
   font-weight: bold;
-  color: #333;
 }

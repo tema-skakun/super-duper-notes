@@ -1,7 +1,14 @@
 .main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  transition: padding 0.3s ease;
+}
+
+@media (max-width: 576px) {
+  .main {
+    padding: 1rem;
+  }
 }

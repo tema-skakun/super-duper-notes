@@ -1,5 +1,14 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #f0ebeb;
+  --danger-color: #dc3545;
+  --light-color: #f8f9fa;
+  --dark-color: #343a40;
+  --border-radius: 8px;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -10,37 +19,28 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--light-color);
+  color: var(--dark-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 a {
-  color: inherit;
+  color: var(--secondary-color);
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+a:hover {
+  color: var(--secondary-color);
 }
 
-main {
-  padding: 1rem;
+button {
+  border-radius: var(--border-radius);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-@media (min-width: 576px) {
-  main {
-    padding: 2rem;
-  }
-}
-
-@media (min-width: 768px) {
-  main {
-    padding: 3rem;
-  }
-}
-
-@media (min-width: 992px) {
-  main {
-    padding: 4rem;
-  }
+button:hover {
+  background-color: var(--dark-color);
+  color: var(--light-color);
 }

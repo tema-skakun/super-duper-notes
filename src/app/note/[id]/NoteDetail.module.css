@@ -1,34 +1,26 @@
 .noteDetail {
   padding: 20px;
   border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  margin-left: 4rem;
-  margin-right: 4rem;
-  margin-bottom: 2rem;
+  border-radius: var(--border-radius);
+  background-color: var(--light-color);
+  margin: 2rem 4rem;
+  transition: box-shadow 0.3s ease, margin 0.3s ease, padding 0.3s ease;
+}
+
+.noteDetail:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 576px) {
+  .noteDetail {
+    margin: 1rem;
+    padding: 10px;
+  }
 }
 
 .noteDetail h1 {
   margin-bottom: 15px;
-  color: #333;
-}
-
-.noteDetail p {
-  margin-bottom: 10px;
-  color: #555;
-}
-
-.noteDetail .buttons {
-
-}
-
-.noteDetail .buttons button {
-  margin: 5px;
-}
-
-.noteDetail h1 {
-  margin-bottom: 15px;
-  color: #333;
+  color: var(--dark-color);
   white-space: normal;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -38,6 +30,12 @@
 }
 
 .noteDetail p {
+  margin-bottom: 10px;
+  color: var(--dark-color);
   white-space: pre-wrap;
   word-wrap: break-word;
+}
+
+.noteDetail .buttons button {
+  margin: 5px;
 }
