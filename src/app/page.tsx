@@ -7,7 +7,8 @@ import { setNotes } from '@/store/notesSlice';
 import Link from 'next/link';
 import { Button, InputGroup, FormControl, Dropdown, Container, Row, Col } from 'react-bootstrap';
 import NoteListItem from "@/components/NoteListItem";
-import {fetchNotes} from "@/api/notes";
+import { fetchNotes } from "@/api/notes";
+import Loader from '@/components/Loader';
 import './globals.css';
 
 const SORT_OPTIONS = ['title', 'createdAt'] as const;
@@ -19,6 +20,7 @@ export default function Home() {
 
   const [filter, setFilter] = useState('');
   const [sort, setSort] = useState<SortOption>('title');
+  const [loading, setLoading] = useState(true);
 
   const filteredNotes = useMemo(() => {
     return notes
@@ -40,12 +42,17 @@ export default function Home() {
         dispatch(setNotes(response.data));
       } catch (error) {
         console.error('Failed to fetch notes:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchNotesData();
   }, [dispatch]);
 
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <Container>
