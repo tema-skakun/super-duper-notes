@@ -1,20 +1,18 @@
 import Link from "next/link";
-import {useState} from "react";
-import {Button, Modal} from "react-bootstrap";
-import {useRouter} from 'next/navigation';
+import { useState } from "react";
+import { Button, Modal } from "react-bootstrap";
 import axios from 'axios';
-import {useDispatch} from 'react-redux';
-import {AppDispatch} from '@/store';
-import {deleteNote} from '@/store/notesSlice';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@/store';
+import { deleteNote } from '@/store/notesSlice';
 import styles from './NoteListItem.module.css';
-import {Note} from "@/types/noteTypes";
+import { Note } from "@/types/noteTypes";
 
 interface NoteListItemProps {
   note: Note;
 }
 
-export default function NoteListItem({note}: NoteListItemProps) {
-  const router = useRouter();
+export default function NoteListItem({ note }: NoteListItemProps) {
   const dispatch = useDispatch<AppDispatch>();
   const [showModal, setShowModal] = useState(false);
 
@@ -26,14 +24,14 @@ export default function NoteListItem({note}: NoteListItemProps) {
   };
 
   return (
-    <div>
-      <div className={styles.note}>
-        <Link title={note.title} href={`/note/${note.id}`}>
+    <div className={styles.note}>
+      <Link className={styles.link} title={note.title} href={`/note/${note.id}`} passHref>
           <h3>{note.title}</h3>
           <p className={styles.content}>{note.content}</p>
-        </Link>
-        <Button variant="danger" onClick={() => setShowModal(true)}>Delete</Button>
-      </div>
+      </Link>
+      <span className={styles.footer}>
+        <Button variant="danger" onClick={() => setShowModal(true)} className={styles.deleteButton}>Delete</Button>
+      </span>
 
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
