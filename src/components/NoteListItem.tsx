@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/store';
-import { deleteNote } from '@/store/notesSlice';
-import styles from './NoteListItem.module.css';
+import { deleteNote as deleteNoteAction } from '@/store/notesSlice';
+import { deleteNote } from '@/api/notes';
 import { Note } from "@/types/noteTypes";
+import styles from './NoteListItem.module.css';
 
 interface NoteListItemProps {
   note: Note;
@@ -17,10 +17,13 @@ export default function NoteListItem({ note }: NoteListItemProps) {
   const [showModal, setShowModal] = useState(false);
 
   const handleDelete = async (id: string) => {
-    const port = process.env.NEXT_PUBLIC_JSON_SERVER_PORT;
-    await axios.delete(`http://localhost:${port}/notes/${id}`);
-    dispatch(deleteNote(id));
-    setShowModal(false);
+    try {
+      await deleteNote(id);
+      dispatch(deleteNoteAction(id));
+      setShowModal(false);
+    } catch (error) {
+      console.error("Failed to delete the note:", error);
+    }
   };
 
   return (
@@ -30,7 +33,16 @@ export default function NoteListItem({ note }: NoteListItemProps) {
           <p className={styles.content}>{note.content}</p>
       </Link>
       <span className={styles.footer}>
-        <Button variant="danger" onClick={() => setShowModal(true)} className={styles.deleteButton}>Delete</Button>
+        <Button
+          variant="danger"
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowModal(true);
+          }}
+          className={styles.deleteButton}
+        >
+          Delete
+        </Button>
       </span>
 
       <Modal show={showModal} onHide={() => setShowModal(false)}>

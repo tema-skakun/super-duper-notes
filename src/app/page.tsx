@@ -4,10 +4,10 @@ import { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '@/store';
 import { setNotes } from '@/store/notesSlice';
-import axios from 'axios';
 import Link from 'next/link';
 import { Button, InputGroup, FormControl, Dropdown, Container, Row, Col } from 'react-bootstrap';
 import NoteListItem from "@/components/NoteListItem";
+import {fetchNotes} from "@/api/notes";
 import './globals.css';
 
 const SORT_OPTIONS = ['title', 'createdAt'] as const;
@@ -34,18 +34,18 @@ export default function Home() {
   }, [notes, filter, sort]);
 
   useEffect(() => {
-    const fetchNotes = async () => {
+    const fetchNotesData = async () => {
       try {
-        const port = process.env.NEXT_PUBLIC_JSON_SERVER_PORT;
-        const response = await axios.get(`http://localhost:${port}/notes`);
+        const response = await fetchNotes();
         dispatch(setNotes(response.data));
       } catch (error) {
         console.error('Failed to fetch notes:', error);
       }
     };
 
-    fetchNotes();
+    fetchNotesData();
   }, [dispatch]);
+
 
   return (
     <Container>

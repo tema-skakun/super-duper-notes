@@ -1,24 +1,21 @@
-import axios from 'axios';
-
-const port = process.env.NEXT_PUBLIC_JSON_SERVER_PORT;
-const baseURL = `http://localhost:${port}/notes`;
+import apiClient from './apiClient';
 
 export const fetchNotes = async () => {
-  return axios.get(baseURL);
+  return apiClient.get('notes');
 };
 
 export const fetchNoteById = async (id: string) => {
-  return axios.get(`${baseURL}/${id}`);
+  return apiClient.get(`notes/${id}`);
 };
 
 export const createNote = async (note: { title: string; content: string }) => {
-  return axios.post(baseURL, note);
+  return apiClient.post('notes', note);
 };
 
 export const updateNote = async (id: string, note: { title: string; content: string; createdAt: string; updatedAt: string }) => {
-  return axios.put(`${baseURL}/${id}`, note);
+  return apiClient.put(`notes/${id}`, note);
 };
 
 export const deleteNote = async (id: string) => {
-  return axios.delete(`${baseURL}/${id}`);
+  return apiClient.delete(`notes/${id}`);
 };
