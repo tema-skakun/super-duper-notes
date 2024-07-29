@@ -1,49 +1,33 @@
-"use client";
-
-import { useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { Button, Alert } from 'react-bootstrap';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { fetchNoteById, deleteNote } from '@/api/notes';
+import { fetchNoteById } from '@/api/notes';
 import styles from './NoteDetail.module.css';
-import { Note } from '@/types/noteTypes';
 import { formatDate } from '@/utils/formatDate';
-import ConfirmDeleteModal from '@/components/ConfirmDeleteModal';
+import Link from 'next/link';
+import { Button, Alert } from 'react-bootstrap';
+import { Note } from '@/types/noteTypes';
 
-export default function NoteDetail() {
-  const { id } = useParams();
-  const [note, setNote] = useState<Note | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [showModal, setShowModal] = useState(false);
-  const router = useRouter();
+interface NoteDetailProps {
+  params: { id: string };
+}
 
-  useEffect(() => {
-    if (id) {
-      const fetchNote = async () => {
-        try {
-          const response = await fetchNoteById(id);
-          setNote(response.data);
-        } catch (err) {
-          setError('Failed to fetch note');
-        }
-      };
+export default async function NoteDetail({ params }: NoteDetailProps) {
+  const { id } = params;
+  let note: Note | null = null;
+  let error: string | null = null;
 
-      fetchNote();
-    }
-  }, [id]);
+  try {
+    const response = await fetchNoteById(id);
+    note = response.data;
+  } catch (err) {
+    error = 'Failed to fetch note';
+  }
 
-  const handleDelete = async () => {
-    try {
-      await deleteNote(id);
-      router.push('/');
-    } catch (err) {
-      setError('Failed to delete note');
-    }
-  };
+  if (error) {
+    return <Alert variant="danger">{error}</Alert>;
+  }
 
-  if (error) return <Alert variant="danger">{error}</Alert>;
-  if (!note) return <p>Loading...</p>;
+  if (!note) {
+    return <p>Loading...</p>;
+  }
 
   const isUpdated = new Date(note.updatedAt).getTime() !== new Date(note.createdAt).getTime();
 
@@ -63,14 +47,7 @@ export default function NoteDetail() {
         <Link href={`/edit/${note.id}`}>
           <Button variant="secondary">Edit Note</Button>
         </Link>
-        <Button variant="danger" onClick={() => setShowModal(true)}>Delete Note</Button>
       </div>
-
-      <ConfirmDeleteModal
-        show={showModal}
-        onHide={() => setShowModal(false)}
-        onConfirm={handleDelete}
-      />
     </div>
   );
 }
